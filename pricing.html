@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 40px;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .pricing {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 200px;
+    }
+    .price {
+      font-size: 24px;
+      color: #2a9d8f;
+      margin: 10px 0;
+    }
+    button {
+      background-color: #2a9d8f;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #21867a;
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Pricing</h1>
+  <div class="pricing">
+    <div class="card">
+      <h2>Basic</h2>
+      <p class="price">R99</p>
+      <p>Good for starters</p>
+      <button>Select</button>
+    </div>
+    <div class="card">
+      <h2>Standard</h2>
+      <p class="price">R199</p>
+      <p>Most popular choice</p>
+      <button>Select</button>
+    </div>
+    <div class="card">
+      <h2>Premium</h2>
+      <p class="price">R299</p>
+      <p>Best for businesses</p>
+      <button>Select</button>
+    </div>
+  </div>
+</body>
+</html>
