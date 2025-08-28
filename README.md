@@ -2,7 +2,7 @@ ST10497168
 
 Fresh Website
 
-This is basic layout of this website thatvallows users to select different products to add to their cart such as jewlery,clothing and shoes as well as other items. It provides them with a wide variety of the most recently released pieces of apparell as well as nieche clothing.
+This is basic layout of this website that allows users to select different products to add to their cart such as jewlery,clothing and shoes as well as other items. It provides them with a wide variety of the most recently released pieces of apparell as well as nieche clothing.
 
 Use the navigation bar to move between pages.
 
