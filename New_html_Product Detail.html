@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh — Product</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container topbar">
+            <a href="index.html" class="logo">
+                <span class="logo-badge">F</span>
+                <span class="logo-text">FRESH</span>
+            </a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="lookbook.html">Lookbook</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="product-detail">
+            <div class="product-gallery">
+                <div class="main-image">
+                    <div class="image-placeholder" data-image="product-main">Product Main Image</div>
+                </div>
+                <div class="thumbnail-grid">
+                    <div class="thumbnail active" data-image="product-1">1</div>
+                    <div class="thumbnail" data-image="product-2">2</div>
+                    <div class="thumbnail" data-image="product-3">3</div>
+                    <div class="thumbnail" data-image="product-4">4</div>
+                </div>
+            </div>
+            
+            <div class="product-info">
+                <h1 id="productTitle">Urban Utility Jacket</h1>
+                <p class="product-price" id="productPrice">$89.99</p>
+                <p class="product-description">The perfect blend of style and functionality. This utility jacket features multiple pockets, water-resistant fabric, and our signature Fresh design.</p>
+                
+                <div class="size-selector">
+                    <h3>Size</h3>
+                    <div class="size-options">
+                        <button class="size-option" data-size="XS">XS</button>
+                        <button class="size-option" data-size="S">S</button>
+                        <button class="size-option active" data-size="M">M</button>
+                        <button class="size-option" data-size="L">L</button>
+                        <button class="size-option" data-size="XL">XL</button>
+                    </div>
+                </div>
+                
+                <div class="color-selector">
+                    <h3>Color</h3>
+                    <div class="color-options">
+                        <div class="color-option active" data-color="black" style="background-color: #000;"></div>
+                        <div class="color-option" data-color="yellow" style="background-color: #FFD700;"></div>
+                        <div class="color-option" data-color="gray" style="background-color: #808080;"></div>
+                    </div>
+                </div>
+                
+                <div class="quantity-selector">
+                    <h3>Quantity</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" id="decreaseQty">-</button>
+                        <span class="quantity-display" id="quantity">1</span>
+                        <button class="quantity-btn" id="increaseQty">+</button>
+                    </div>
+                </div>
+                
+                <button class="add-to-cart-btn" id="addToCart">Add to Cart</button>
+                
+                <div class="product-features">
+                    <h3>Features</h3>
+                    <ul>
+                        <li>Water-resistant fabric</li>
+                        <li>Multiple utility pockets</li>
+                        <li>Adjustable cuffs</li>
+                        <li>Signature Fresh branding</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Complete the Look -->
+        <section class="complete-look">
+            <h2>Complete the Look</h2>
+            <div class="look-suggestions" id="lookSuggestions">
+                <!-- JavaScript will populate this -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year">2024</span> Fresh. All rights reserved. Style for All.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeProductPage();
+        });
+    </script>
+</body>
+</html>

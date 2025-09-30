@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh — Shop</title>
+    <style>
+        :root {
+            --fresh-yellow: #FFD700;
+            --fresh-black: #000000;
+            --fresh-gray: #1a1a1a;
+            --fresh-light-gray: #f5f5f5;
+            --fresh-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            color: var(--fresh-black);
+            background-color: var(--fresh-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--fresh-black);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--fresh-yellow);
+            color: var(--fresh-black);
+            font-weight: 900;
+            font-size: 1.5rem;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            color: var(--fresh-yellow);
+            font-weight: 800;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--fresh-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--fresh-yellow);
+        }
+
+        nav a.active {
+            color: var(--fresh-yellow);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--fresh-yellow);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--fresh-yellow);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+            min-height: 70vh;
+        }
+
+        h1 {
+            color: var(--fresh-black);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .shop-hero {
+            background: linear-gradient(135deg, var(--fresh-black) 0%, var(--fresh-gray) 100%);
+            color: var(--fresh-white);
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .shop-hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--fresh-yellow);
+        }
+
+        .shop-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: var(--fresh-light-gray);
+            border: 2px solid transparent;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .category-btn.active {
+            background: var(--fresh-yellow);
+            color: var(--fresh-black);
+            border-color: var(--fresh-black);
+        }
+
+        .category-btn:hover:not(.active) {
+            background: var(--fresh-black);
+            color: var(--fresh-white);
+        }
+
+        /* Filters */
+        .filters {
+            background: var(--fresh-light-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .filter-header h3 {
+            color: var(--fresh-black);
+            font-size: 1.3rem;
+        }
+
+        .filter-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-group h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--fresh-black);
+        }
+
+        .filter-options-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-option {
+            background: var(--fresh-white);
+            border: 1px solid #ddd;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-option:hover, .filter-option.active {
+            background: var(--fresh-black);
+            color: var(--fresh-white);
+            border-color: var(--fresh-black);
+        }
+
+        .price-range {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        .price-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: var(--fresh-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--fresh-yellow);
+            color: var(--fresh-black);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .product-info {
+            padding: 1.2rem;
+        }
+
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .product-price {
+            color: var(--fresh-black);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price.sale {
+            color: #e74c3c;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        .product-colors {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .color-option {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .color-black { background-color: #000; }
+        .color-yellow { background-color: #FFD700; }
+        .color-white { background-color: #fff; }
+        .color-gray { background-color: #808080; }
+
+        .add-to-cart {
+            background: var(--fresh-yellow);
+            color: var(--fresh-black);
+            border: none;
+            padding: 10px 0;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .add-to-cart:hover {
+            background: var(--fresh-black);
+            color: var(--fresh-yellow);
+        }
+
+        /* New Arrivals Section */
+        .new-arrivals {
+            margin: 4rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            color: var(--fresh-black);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .view-all {
+            color: var(--fresh-black);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .view-all:hover {
+            color: var(--fresh-yellow);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--fresh-black);
+            color: var(--fresh-white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .topbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav {
+                gap: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .shop-hero h2 {
+                font-size: 2rem;
+            }
+            
+            .filter-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container topbar">
+            <a href="index.html" class="logo">
+                <span class="logo-badge">F</span>
+                <span class="logo-text">FRESH</span>
+            </a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="services.html" class="active">Shop</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="pricing.html">Lookbook</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Fresh Collection</h1>
+        
+        <section class="shop-hero">
+            <h2>Style For All</h2>
+            <p>Discover our latest urban-inspired collection designed to empower your unique style with confidence.</p>
+        </section>
+        
+        <div class="categories">
+            <button class="category-btn active">All</button>
+            <button class="category-btn">Men</button>
+            <button class="category-btn">Women</button>
+            <button class="category-btn">Accessories</button>
+            <button class="category-btn">New Arrivals</button>
+            <button class="category-btn">Sale</button>
+        </div>
+        
+        <div class="filters">
+            <div class="filter-header">
+                <h3>Filter Products</h3>
+            </div>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <h4>Size</h4>
+                    <div class="filter-options-list">
+                        <span class="filter-option">XS</span>
+                        <span class="filter-option">S</span>
+                        <span class="filter-option active">M</span>
+                        <span class="filter-option">L</span>
+                        <span class="filter-option">XL</span>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Color</h4>
+                    <div class="filter-options-list">
+                        <span class="filter-option">Black</span>
+                        <span class="filter-option">Yellow</span>
+                        <span class="filter-option">White</span>
+                        <span class="filter-option">Gray</span>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Price Range</h4>
+                    <input type="range" min="0" max="200" value="100" class="price-range">
+                    <div class="price-labels">
+                        <span>$0</span>
+                        <span>$100</span>
+                        <span>$200+</span>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Vibe</h4>
+                    <div class="filter-options-list">
+                        <span class="filter-option">Urban</span>
+                        <span class="filter-option">Casual</span>
+                        <span class="filter-option">Street</span>
+                        <span class="filter-option">Minimal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <section class="new-arrivals">
+            <div class="section-header">
+                <h2>Fresh Picks</h2>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-badge">New</div>
+                    <div class="product-image">Urban Jacket - Image</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Urban Utility Jacket</h3>
+                        <div class="product-price">$89.99</div>
+                        <div class="product-colors">
+                            <div class="color-option color-black"></div>
+                            <div class="color-option color-yellow"></div>
+                            <div class="color-option color-gray"></div>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">Sale</div>
+                    <div class="product-image">Graphic Tee - Image</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Fresh Logo Tee</h3>
+                        <div class="product-price sale">$24.99 <span class="original-price">$34.99</span></div>
+                        <div class="product-colors">
+                            <div class="color-option color-black"></div>
+                            <div class="color-option color-white"></div>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">Cargo Pants - Image</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Urban Cargo Pants</h3>
+                        <div class="product-price">$64.99</div>
+                        <div class="product-colors">
+                            <div class="color-option color-black"></div>
+                            <div class="color-option color-gray"></div>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">Beanie - Image</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Fresh Logo Beanie</h3>
+                        <div class="product-price">$22.99</div>
+                        <div class="product-colors">
+                            <div class="color-option color-black"></div>
+                            <div class="color-option color-yellow"></div>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">New</div>
+                    <div class="product-image">Sneakers - Image</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Urban High-Tops</h3>
+                        <div class="product-price">$119.99</div>
+                        <div class="product-colors">
+                            <div class="color-option color-black"></div>
+                            <div class="color-option color-white"></div>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">Backpack - Image</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Utility Backpack</h3>
+                        <div class="product-price">$79.99</div>
+                        <div class="product-colors">
+                            <div class="color-option color-black"></div>
+                            <div class="color-option color-yellow"></div>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year">2024</span> Fresh. All rights reserved. Style for All.</p>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Category buttons functionality
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+        
+        // Filter options functionality
+        const filterOptions = document.querySelectorAll('.filter-option');
+        filterOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                option.classList.toggle('active');
+            });
+        });
+        
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const productTitle = button.closest('.product-card').querySelector('.product-title').textContent;
+                alert(`Added ${productTitle} to your cart!`);
+            });
+        });
+    </script>
+</body>
+</html>

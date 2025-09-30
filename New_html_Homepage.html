@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh — Style for All</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container topbar">
+            <a href="index.html" class="logo">
+                <span class="logo-badge">F</span>
+                <span class="logo-text">FRESH</span>
+            </a>
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="lookbook.html">Lookbook</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">STYLE FOR ALL</h1>
+                    <p class="hero-subtitle">Urban-inspired fashion that empowers your unique expression</p>
+                    <a href="shop.html" class="shop-now-btn">Shop Now</a>
+                </div>
+                <div class="hero-image">
+                    <div class="image-placeholder" data-image="hero-model">Hero Model</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fresh Picks -->
+        <section class="fresh-picks">
+            <h2>Fresh Picks</h2>
+            <div class="picks-grid" id="freshPicksGrid">
+                <!-- JavaScript will populate this -->
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories-section">
+            <h2>Shop by Category</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="men">
+                    <div class="category-image">Men's Collection</div>
+                    <h3>Men</h3>
+                </div>
+                <div class="category-card" data-category="women">
+                    <div class="category-image">Women's Collection</div>
+                    <h3>Women</h3>
+                </div>
+                <div class="category-card" data-category="accessories">
+                    <div class="category-image">Accessories</div>
+                    <h3>Accessories</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year">2024</span> Fresh. All rights reserved. Style for All.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize homepage
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load fresh picks
+            loadFreshPicks();
+            
+            // Add category click handlers
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    window.location.href = `shop.html?category=${category}`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

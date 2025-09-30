@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fresh — Lookbook</title>
+  <style>
+    :root {
+      --fresh-yellow: #FFD700;
+      --fresh-black: #000000;
+      --fresh-gray: #1a1a1a;
+      --fresh-light-gray: #f5f5f5;
+      --fresh-white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', 'Arial', sans-serif;
+      line-height: 1.6;
+      color: var(--fresh-black);
+      background-color: var(--fresh-white);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--fresh-black);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--fresh-yellow);
+      color: var(--fresh-black);
+      font-weight: 900;
+      font-size: 1.5rem;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      color: var(--fresh-yellow);
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--fresh-white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--fresh-yellow);
+    }
+
+    nav a.active {
+      color: var(--fresh-yellow);
+    }
+
+    nav a.active::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--fresh-yellow);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--fresh-yellow);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Main Content */
+    main {
+      padding: 3rem 0;
+      min-height: 70vh;
+    }
+
+    h1 {
+      color: var(--fresh-black);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Lookbook Intro */
+    .lookbook-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    .lookbook-intro p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .season-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .season-tab {
+      background: var(--fresh-light-gray);
+      border: 2px solid transparent;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .season-tab.active {
+      background: var(--fresh-yellow);
+      color: var(--fresh-black);
+      border-color: var(--fresh-black);
+    }
+
+    .season-tab:hover:not(.active) {
+      background: var(--fresh-black);
+      color: var(--fresh-white);
+    }
+
+    /* Lookbook Grid */
+    .lookbook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .lookbook-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .lookbook-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .lookbook-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .lookbook-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: var(--fresh-white);
+      padding: 1.5rem;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .lookbook-item:hover .lookbook-overlay {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .lookbook-overlay h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .lookbook-overlay p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .shop-outfit {
+      background: var(--fresh-yellow);
+      color: var(--fresh-black);
+      border: none;
+      padding: 8px 15px;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .shop-outfit:hover {
+      background: var(--fresh-white);
+      color: var(--fresh-black);
+    }
+
+    /* Editorial Section */
+    .editorial-section {
+      margin: 4rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      color: var(--fresh-black);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .editorial-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .editorial-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+    }
+
+    .editorial-content {
+      padding: 1.5rem;
+    }
+
+    .editorial-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .editorial-content p {
+      color: #555;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .read-more {
+      color: var(--fresh-black);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .read-more:hover {
+      color: var(--fresh-yellow);
+    }
+
+    /* Style Journal */
+    .style-journal {
+      background: var(--fresh-light-gray);
+      padding: 3rem 2rem;
+      border-radius: 10px;
+      margin: 4rem 0;
+      text-align: center;
+    }
+
+    .style-journal h2 {
+      color: var(--fresh-black);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .style-journal p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: #555;
+    }
+
+    .social-integration {
+      background: var(--fresh-black);
+      color: var(--fresh-white);
+      padding: 2rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
+
+    .hashtag {
+      color: var(--fresh-yellow);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .social-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-photo {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.8rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--fresh-black);
+      color: var(--fresh-white);
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      nav {
+        gap: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .lookbook-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">F</span>
+        <span class="logo-text">FRESH</span>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="services.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="pricing.html" class="active">Lookbook</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Fresh Lookbook</h1>
+    
+    <div class="lookbook-intro">
+      <p>Discover seasonal trends, styling inspiration, and editorial stories from the Fresh collection. Our lookbook showcases how to wear our pieces in real life with confidence and attitude.</p>
+      
+      <div class="season-tabs">
+        <div class="season-tab active">Spring/Summer</div>
+        <div class="season-tab">Fall/Winter</div>
+        <div class="season-tab">Urban Essentials</div>
+        <div class="season-tab">Street Style</div>
+      </div>
+    </div>
+    
+    <div class="lookbook-grid">
+      <div class="lookbook-item">
+        <div class="lookbook-image">Urban Street Style - Image</div>
+        <div class="lookbook-overlay">
+          <h3>Urban Edge</h3>
+          <p>Layered looks for the city streets</p>
+          <button class="shop-outfit">Shop This Look</button>
+        </div>
+      </div>
+      
+      <div class="lookbook-item">
+        <div class="lookbook-image">Minimalist Daywear - Image</div>
+        <div class="lookbook-overlay">
+          <h3>Clean Lines</h3>
+          <p>Effortless minimalism for everyday</p>
+          <button class="shop-outfit">Shop This Look</button>
+        </div>
+      </div>
+      
+      <div class="lookbook-item">
+        <div class="lookbook-image">Evening Transition - Image</div>
+        <div class="lookbook-overlay">
+          <h3>Day to Night</h3>
+          <p>Versatile pieces that work overtime</p>
+          <button class="shop-outfit">Shop This Look</button>
+        </div>
+      </div>
+      
+      <div class="lookbook-item">
+        <div class="lookbook-image">Accessories Focus - Image</div>
+        <div class="lookbook-overlay">
+          <h3>Accent Pieces</h3>
+          <p>Elevate your look with statement accessories</p>
+          <button class="shop-outfit">Shop This Look</button>
+        </div>
+      </div>
+      
+      <div class="lookbook-item">
+        <div class="lookbook-image">Monochromatic Styling - Image</div>
+        <div class="lookbook-overlay">
+          <h3>All Black Everything</h3>
+          <p>Powerful monochrome ensembles</p>
+          <button class="shop-outfit">Shop This Look</button>
+        </div>
+      </div>
+      
+      <div class="lookbook-item">
+        <div class="lookbook-image">Weekend Casual - Image</div>
+        <div class="lookbook-overlay">
+          <h3>Weekend Vibe</h3>
+          <p>Comfort meets style for your days off</p>
+          <button class="shop-outfit">Shop This Look</button>
+        </div>
+      </div>
+    </div>
+    
+    <section class="editorial-section">
+      <div class="section-header">
+        <h2>Style Journal</h2>
+      </div>
+      
+      <div class="editorial-grid">
+        <div class="editorial-card">
+          <div class="editorial-image">Seasonal Trends - Image</div>
+          <div class="editorial-content">
+            <h3>Spring 2024 Trends</h3>
+            <p>Discover the key pieces and styling techniques dominating the urban fashion scene this season.</p>
+            <a href="#" class="read-more">Read More →</a>
+          </div>
+        </div>
+        
+        <div class="editorial-card">
+          <div class="editorial-image">Accessory Guide - Image</div>
+          <div class="editorial-content">
+            <h3>The Art of Accessorizing</h3>
+            <p>How to choose and style accessories to elevate your Fresh look from basic to exceptional.</p>
+            <a href="#" class="read-more">Read More →</a>
+          </div>
+        </div>
+        
+        <div class="editorial-card">
+          <div class="editorial-image">Fabric Care - Image</div>
+          <div class="editorial-content">
+            <h3>Caring for Your Fresh Gear</h3>
+            <p>Expert tips on maintaining the quality and longevity of your favorite Fresh pieces.</p>
+            <a href="#" class="read-more">Read More →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="style-journal">
+      <h2>Join the Fresh Community</h2>
+      <p>Share your style with us and get featured in our lookbook. Show us how you wear Fresh with confidence and attitude.</p>
+      
+      <div class="social-integration">
+        <p>Tag your photos with <span class="hashtag">#StayFresh</span> for a chance to be featured</p>
+        
+        <div class="social-gallery">
+          <div class="social-photo">Customer Photo</div>
+          <div class="social-photo">Customer Photo</div>
+          <div class="social-photo">Customer Photo</div>
+          <div class="social-photo">Customer Photo</div>
+          <div class="social-photo">Customer Photo</div>
+          <div class="social-photo">Customer Photo</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year">2024</span> Fresh. All rights reserved. Style for All.</p>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Season tabs functionality
+    const seasonTabs = document.querySelectorAll('.season-tab');
+    seasonTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        seasonTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+    
+    // Shop outfit buttons functionality
+    const shopButtons = document.querySelectorAll('.shop-outfit');
+    shopButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const lookTitle = button.closest('.lookbook-overlay').querySelector('h3').textContent;
+        alert(`Exploring pieces from "${lookTitle}" collection!`);
+      });
+    });
+  </script>
+</body>
+</html>

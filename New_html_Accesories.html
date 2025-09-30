@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh — Accessories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container topbar">
+            <a href="index.html" class="logo">
+                <span class="logo-badge">F</span>
+                <span class="logo-text">FRESH</span>
+            </a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="lookbook.html">Lookbook</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Accessories</h1>
+        <p class="page-intro">Complete your look with our curated selection of accessories. Each piece is designed to add that perfect Fresh touch to any outfit.</p>
+        
+        <div class="accessories-filters">
+            <div class="filter-group">
+                <h3>Category</h3>
+                <div class="filter-options">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="sunglasses">Sunglasses</button>
+                    <button class="filter-btn" data-category="bags">Bags</button>
+                    <button class="filter-btn" data-category="hats">Hats</button>
+                    <button class="filter-btn" data-category="watches">Watches</button>
+                    <button class="filter-btn" data-category="jewelry">Jewelry</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accessories-grid" id="accessoriesGrid">
+            <!-- JavaScript will populate this -->
+        </div>
+        
+        <!-- Styling Section -->
+        <section class="styling-section">
+            <h2>How to Style Your Accessories</h2>
+            <div class="styling-tips">
+                <div class="styling-tip">
+                    <div class="tip-image">Sunglasses Styling</div>
+                    <h3>Sunglasses</h3>
+                    <p>Pair our bold frames with minimalist outfits to let your accessories make the statement.</p>
+                </div>
+                <div class="styling-tip">
+                    <div class="tip-image">Bag Styling</div>
+                    <h3>Bags</h3>
+                    <p>Choose bags that complement your color scheme while adding functional style to your look.</p>
+                </div>
+                <div class="styling-tip">
+                    <div class="tip-image">Hat Styling</div>
+                    <h3>Hats</h3>
+                    <p>Use hats to add personality and complete your urban-inspired ensemble.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year">2024</span> Fresh. All rights reserved. Style for All.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAccessoriesPage();
+        });
+    </script>
+</body>
+</html>
